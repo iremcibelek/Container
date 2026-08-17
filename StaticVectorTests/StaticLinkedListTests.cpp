@@ -2,7 +2,7 @@
 #include "StaticLinkedList.h"
 
 TEST(StaticLinkedListTest, PushFront) {
-    StaticLinkedList list;
+    StaticLinkedList<int> list(10);
 
     EXPECT_TRUE(list.push_front(10)); // 10
     EXPECT_EQ(list.size(), 1);
@@ -18,7 +18,7 @@ TEST(StaticLinkedListTest, PushFront) {
 }
 
 TEST(StaticLinkedListTest, PushBack) {
-    StaticLinkedList list;
+    StaticLinkedList<int> list(10);
 
     EXPECT_TRUE(list.push_back(10)); // 10
     EXPECT_EQ(list.size(), 1);
@@ -39,7 +39,7 @@ TEST(StaticLinkedListTest, PushBack) {
 
 
 TEST(StaticLinkedListTest, PopFront) {
-   StaticLinkedList list;
+   StaticLinkedList<int> list(10);
 
     EXPECT_FALSE(list.pop_front());
 
@@ -58,7 +58,7 @@ TEST(StaticLinkedListTest, PopFront) {
 }
 
 TEST(StaticLinkedListTest, PopBack) {
-	StaticLinkedList list;
+	StaticLinkedList<int> list(10);
 
 	EXPECT_FALSE(list.pop_back());
 
@@ -79,7 +79,7 @@ TEST(StaticLinkedListTest, PopBack) {
 }
 
 TEST(StaticLinkedListTest, InsertByIndex) {
-	StaticLinkedList list;
+	StaticLinkedList<int> list(10);
 
 	EXPECT_FALSE(list.insertByIndex(3, 30));
 	EXPECT_TRUE(list.isEmpty());
@@ -102,7 +102,7 @@ TEST(StaticLinkedListTest, InsertByIndex) {
 }
 
 TEST(StaticLinkedListTest, EraseByIndex) {
-	StaticLinkedList list;
+	StaticLinkedList<int> list(10);
 
 	EXPECT_FALSE(list.eraseByIndex(3));
 	EXPECT_TRUE(list.isEmpty());
@@ -124,7 +124,7 @@ TEST(StaticLinkedListTest, EraseByIndex) {
 }
 
 TEST(StaticLinkedListTest, EraseByData) {
-	StaticLinkedList list;
+	StaticLinkedList<int> list(10);
 
 	EXPECT_FALSE(list.eraseByData(10));
 
@@ -145,7 +145,7 @@ TEST(StaticLinkedListTest, EraseByData) {
 }
 
 TEST(StaticLinkedListTests, SizeAndEmpty) {
-	StaticLinkedList list;
+	StaticLinkedList<int> list(10);
 
 	EXPECT_EQ(list.size(), 0);
 
@@ -168,7 +168,7 @@ TEST(StaticLinkedListTests, SizeAndEmpty) {
 }
 
 TEST(StaticLinkedListTest, Capacity) {
-	StaticLinkedList list;
+	StaticLinkedList<int> list(10);
 
 	EXPECT_EQ(list.capacity(), 10);
 	EXPECT_FALSE(list.isFull());
@@ -185,7 +185,7 @@ TEST(StaticLinkedListTest, Capacity) {
 }
 
 TEST(StaticLinkedListTest, Front) {
-	StaticLinkedList list;
+	StaticLinkedList<int> list(10);
 
 	EXPECT_EQ(list.front(), nullptr);
 
@@ -209,7 +209,7 @@ TEST(StaticLinkedListTest, Front) {
 }
 
 TEST(StaticLinkedListTest, Back) {
-	StaticLinkedList list;
+	StaticLinkedList<int> list(10);
 
 	EXPECT_EQ(list.back(), nullptr);
 
@@ -230,7 +230,7 @@ TEST(StaticLinkedListTest, Back) {
 }
 
 TEST(StaticLinkedListTest, Clear) {
-	StaticLinkedList list;
+	StaticLinkedList<int> list(10);
 
 	list.push_back(10);
 	list.clear();
@@ -247,7 +247,7 @@ TEST(StaticLinkedListTest, Clear) {
 }
 
 TEST(StaticLinkedListTest, Exists) {
-	StaticLinkedList list;
+	StaticLinkedList<int> list(10);
 
 	EXPECT_FALSE(list.exists(100));
 
@@ -271,7 +271,7 @@ TEST(StaticLinkedListTest, Exists) {
 }
 
 TEST(StaticLinkedListTest, Find) {
-	StaticLinkedList list;
+	StaticLinkedList<int> list(10);
 
 	EXPECT_EQ(list.find(10), list.size());
 
@@ -294,7 +294,7 @@ TEST(StaticLinkedListTest, Find) {
 }
 
 TEST(StaticLinkedListTest, Reverse) {
-	StaticLinkedList list;
+	StaticLinkedList<double> list(5);
 
 	list.push_back(10);
 	list.push_back(20);
@@ -311,7 +311,7 @@ TEST(StaticLinkedListTest, Reverse) {
 }
 
 TEST(StaticLinkedListTest, ReuseFreedNode) {
-	StaticLinkedList list;
+	StaticLinkedList<double> list(3);
 
 	list.push_back(10);
 	list.push_back(20);
@@ -327,4 +327,17 @@ TEST(StaticLinkedListTest, ReuseFreedNode) {
 	EXPECT_EQ(*list.front(), 10);
 	EXPECT_EQ(*list.back(), 40);
 	EXPECT_TRUE(list.exists(40));
+}
+
+TEST(StaticLinkedListTest, DifferentCapacity) {
+	StaticLinkedList<int> list(3);
+
+	EXPECT_EQ(list.capacity(), 3);
+
+	EXPECT_TRUE(list.push_back(10));
+	EXPECT_TRUE(list.push_back(20));
+	EXPECT_TRUE(list.push_back(30));
+
+	EXPECT_TRUE(list.isFull());
+	EXPECT_FALSE(list.push_back(40));
 }

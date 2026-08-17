@@ -1,13 +1,33 @@
 #include "StaticLinkedList.h"
 
-bool StaticLinkedList::push_front(const int& value) {
+template<typename T>
+StaticLinkedList<T>::StaticLinkedList(std::size_t capacity)
+{
+	this->capacity_ = capacity;
+	list = new Node[capacity];
 
-	if (count == Capacity)
+	for (std::size_t i = 0; i < capacity_; i++) {
+		list[i].used = false;
+		list[i].next = nullptr;
+	}
+}
+
+template<typename T>
+StaticLinkedList<T>::~StaticLinkedList()
+{
+	delete[] list;
+}
+
+
+template<typename T>
+bool StaticLinkedList<T>::push_front(const T& value) {
+
+	if (count == capacity_)
 		return false;
 
 	Node* newNode = nullptr;
 
-	for (std::size_t i = 0;i < Capacity;i++) {
+	for (std::size_t i = 0;i < capacity_;i++) {
 		if (!list[i].used) {
 			newNode = &list[i];
 			break;
@@ -24,15 +44,16 @@ bool StaticLinkedList::push_front(const int& value) {
 	return true;
 }
 
-bool StaticLinkedList::push_back(const int& value) {
+template<typename T>
+bool StaticLinkedList<T>::push_back(const T& value) {
 
-	if (count == Capacity)
+	if (count == capacity_)
 		return false;
 
 	Node* newNode = nullptr;
 
 	// diziyi gez bos Node bul
-	for (std::size_t i = 0;i < Capacity;i++) {
+	for (std::size_t i = 0;i < capacity_;i++) {
 		if (!list[i].used) {
 			newNode = &list[i];
 			break;
@@ -63,8 +84,8 @@ bool StaticLinkedList::push_back(const int& value) {
 	return true;
 }
 
-
-bool StaticLinkedList::pop_front() {
+template<typename T>
+bool StaticLinkedList<T>::pop_front() {
 
 	if (head == nullptr)
 		return false;
@@ -80,7 +101,8 @@ bool StaticLinkedList::pop_front() {
 	return true;
 }
 
-bool StaticLinkedList::pop_back() {
+template<typename T>
+bool StaticLinkedList<T>::pop_back() {
 
 	if (head == nullptr) // liste bossa
 		return false;
@@ -110,9 +132,10 @@ bool StaticLinkedList::pop_back() {
 	return true;
 }
 
-bool StaticLinkedList::insertByIndex(std::size_t index, const int& value) {
+template<typename T>
+bool StaticLinkedList<T>::insertByIndex(std::size_t index, const T& value) {
 
-	if (count == Capacity) // list dolu
+	if (count == capacity_) // list dolu
 		return false;
 
 	if (index > count) // hatalý index
@@ -126,7 +149,7 @@ bool StaticLinkedList::insertByIndex(std::size_t index, const int& value) {
 
 	//Bos Node bul
 	Node* newNode = nullptr;
-	for (std::size_t i = 0;i < Capacity;i++) {
+	for (std::size_t i = 0;i < capacity_;i++) {
 		if (!list[i].used) {
 			newNode = &list[i];
 			break;
@@ -147,7 +170,8 @@ bool StaticLinkedList::insertByIndex(std::size_t index, const int& value) {
 	return true;
 }
 
-bool StaticLinkedList::eraseByIndex(std::size_t index) {
+template<typename T>
+bool StaticLinkedList<T>::eraseByIndex(std::size_t index) {
 
 	if (index >= count)
 		return false;
@@ -173,7 +197,8 @@ bool StaticLinkedList::eraseByIndex(std::size_t index) {
 	return true;
 }
 
-bool StaticLinkedList::eraseByData(const int& value) {
+template<typename T>
+bool StaticLinkedList<T>::eraseByData(const T& value) {
 
 	if (head == nullptr)
 		return false; // list bos
@@ -199,24 +224,28 @@ bool StaticLinkedList::eraseByData(const int& value) {
 	return true;
 }
 
-
-std::size_t StaticLinkedList::size() const {
+template<typename T>
+std::size_t StaticLinkedList<T>::size() const {
 	return count;
 }
 
-bool StaticLinkedList::isEmpty() const {
+template<typename T>
+bool StaticLinkedList<T>::isEmpty() const {
 	return count == 0;
 }
 
-bool StaticLinkedList::isFull() const {
-	return count == Capacity;
+template<typename T>
+bool StaticLinkedList<T>::isFull() const {
+	return count == capacity_;
 }
 
-std::size_t StaticLinkedList::capacity() const {
-	return Capacity;
+template<typename T>
+std::size_t StaticLinkedList<T>::capacity() const {
+	return capacity_;
 }
 
-int* StaticLinkedList::front() {
+template<typename T>
+T* StaticLinkedList<T>::front() {
 
 	if (head == nullptr)
 		return nullptr;
@@ -224,7 +253,8 @@ int* StaticLinkedList::front() {
 	return &head->data;
 }
 
-const int* StaticLinkedList::front() const {
+template<typename T>
+const T* StaticLinkedList<T>::front() const {
 	if (head == nullptr)
 		return nullptr;
 
@@ -232,7 +262,8 @@ const int* StaticLinkedList::front() const {
 }
 
 
-int* StaticLinkedList::back(){
+template<typename T>
+T* StaticLinkedList<T>::back(){
 
 	if (head == nullptr)
 		return nullptr;
@@ -244,7 +275,8 @@ int* StaticLinkedList::back(){
 	return &temp->data;
 }
 
-const int* StaticLinkedList::back() const {
+template<typename T>
+const T* StaticLinkedList<T>::back() const {
 
 	if (head == nullptr)
 		return nullptr;
@@ -256,7 +288,8 @@ const int* StaticLinkedList::back() const {
 	return &temp->data;
 }
 
-void StaticLinkedList::clear() {
+template<typename T>
+void StaticLinkedList<T>::clear() {
 
 	Node* temp = head;
 
@@ -274,7 +307,8 @@ void StaticLinkedList::clear() {
 	count = 0;
 }
 
-bool StaticLinkedList::exists(const int& value) const {
+template<typename T>
+bool StaticLinkedList<T>::exists(const T& value) const {
 
 	Node* temp = head;
 
@@ -289,7 +323,8 @@ bool StaticLinkedList::exists(const int& value) const {
 	return false;
 }
 
-std::size_t StaticLinkedList::find(const int& value) const {
+template<typename T>
+std::size_t StaticLinkedList<T>::find(const T& value) const {
 
 	Node* temp = head;
 	std::size_t index = 0;
@@ -304,7 +339,8 @@ std::size_t StaticLinkedList::find(const int& value) const {
 	return count; // bulunamadý
 }
 
-void StaticLinkedList::reverse() {
+template<typename T>
+void StaticLinkedList<T>::reverse() {
 	Node* prev = nullptr;
 	Node* current = head;
 	Node* next = nullptr;
@@ -321,3 +357,6 @@ void StaticLinkedList::reverse() {
 
 	head = prev;
 }
+
+template class StaticLinkedList<int>;
+template class StaticLinkedList<double>;
