@@ -22,6 +22,9 @@
     <Filter Include="LinkedList">
       <UniqueIdentifier>{a410dad7-4b3e-4bef-81f0-fc15c6ab50b3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StaticLinkedList">
+      <UniqueIdentifier>{4d896e40-f82a-44ea-bb0a-ffda39ee160c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -36,6 +39,9 @@
     <ClCompile Include="LinkedList.cpp">
       <Filter>LinkedList</Filter>
     </ClCompile>
+    <ClCompile Include="StaticLinkedList.cpp">
+      <Filter>StaticLinkedList</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StaticVector.h">
@@ -46,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="LinkedList.h">
       <Filter>LinkedList</Filter>
+    </ClInclude>
+    <ClInclude Include="StaticLinkedList.h">
+      <Filter>StaticLinkedList</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
