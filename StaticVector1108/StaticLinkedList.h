@@ -1,24 +1,23 @@
 #pragma once
 
 #include <cstddef>
+#include "ObjectPool.h"
 
 template <typename T>
 class StaticLinkedList {
-private:
-
+public:
     struct Node {
         T data;
-        Node* next;
-        bool used;
+        Node* next = nullptr;
     };
 
-    Node* list;
-    std::size_t capacity_;
+private:
+    ObjectPool<Node>& pool;
     Node* head = nullptr;
     std::size_t count = 0;
 
 public:
-    explicit StaticLinkedList(std::size_t capacity);
+    explicit StaticLinkedList(ObjectPool<Node>& pool);
     ~StaticLinkedList();
 
     bool push_front(const T& value);

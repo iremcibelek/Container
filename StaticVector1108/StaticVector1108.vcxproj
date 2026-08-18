@@ -133,12 +133,14 @@
   <ItemGroup>
     <ClCompile Include="LinkedList.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ObjectPool.cpp" />
     <ClCompile Include="StaticLinkedList.cpp" />
     <ClCompile Include="StaticQueue.cpp" />
     <ClCompile Include="StaticVector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LinkedList.h" />
+    <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="StaticLinkedList.h" />
     <ClInclude Include="StaticQueue.h" />
     <ClInclude Include="StaticVector.h" />

@@ -1,8 +1,10 @@
 #include "pch.h"
 #include "StaticLinkedList.h"
+#include "ObjectPool.h"
 
 TEST(StaticLinkedListTest, PushFront) {
-    StaticLinkedList<int> list(10);
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+    StaticLinkedList<int> list(pool);
 
     EXPECT_TRUE(list.push_front(10)); // 10
     EXPECT_EQ(list.size(), 1);
@@ -18,7 +20,8 @@ TEST(StaticLinkedListTest, PushFront) {
 }
 
 TEST(StaticLinkedListTest, PushBack) {
-    StaticLinkedList<int> list(10);
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+    StaticLinkedList<int> list(pool);
 
     EXPECT_TRUE(list.push_back(10)); // 10
     EXPECT_EQ(list.size(), 1);
@@ -39,7 +42,8 @@ TEST(StaticLinkedListTest, PushBack) {
 
 
 TEST(StaticLinkedListTest, PopFront) {
-   StaticLinkedList<int> list(10);
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+   StaticLinkedList<int> list(pool);
 
     EXPECT_FALSE(list.pop_front());
 
@@ -58,7 +62,8 @@ TEST(StaticLinkedListTest, PopFront) {
 }
 
 TEST(StaticLinkedListTest, PopBack) {
-	StaticLinkedList<int> list(10);
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+	StaticLinkedList<int> list(pool);
 
 	EXPECT_FALSE(list.pop_back());
 
@@ -79,7 +84,8 @@ TEST(StaticLinkedListTest, PopBack) {
 }
 
 TEST(StaticLinkedListTest, InsertByIndex) {
-	StaticLinkedList<int> list(10);
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+	StaticLinkedList<int> list(pool);
 
 	EXPECT_FALSE(list.insertByIndex(3, 30));
 	EXPECT_TRUE(list.isEmpty());
@@ -102,7 +108,8 @@ TEST(StaticLinkedListTest, InsertByIndex) {
 }
 
 TEST(StaticLinkedListTest, EraseByIndex) {
-	StaticLinkedList<int> list(10);
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+	StaticLinkedList<int> list(pool);
 
 	EXPECT_FALSE(list.eraseByIndex(3));
 	EXPECT_TRUE(list.isEmpty());
@@ -124,7 +131,8 @@ TEST(StaticLinkedListTest, EraseByIndex) {
 }
 
 TEST(StaticLinkedListTest, EraseByData) {
-	StaticLinkedList<int> list(10);
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+	StaticLinkedList<int> list(pool);
 
 	EXPECT_FALSE(list.eraseByData(10));
 
@@ -144,8 +152,9 @@ TEST(StaticLinkedListTest, EraseByData) {
 	EXPECT_EQ(*list.back(), 20);
 }
 
-TEST(StaticLinkedListTests, SizeAndEmpty) {
-	StaticLinkedList<int> list(10);
+TEST(StaticLinkedListTest, SizeAndEmpty) {
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+	StaticLinkedList<int> list(pool);
 
 	EXPECT_EQ(list.size(), 0);
 
@@ -168,7 +177,8 @@ TEST(StaticLinkedListTests, SizeAndEmpty) {
 }
 
 TEST(StaticLinkedListTest, Capacity) {
-	StaticLinkedList<int> list(10);
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+	StaticLinkedList<int> list(pool);
 
 	EXPECT_EQ(list.capacity(), 10);
 	EXPECT_FALSE(list.isFull());
@@ -185,7 +195,8 @@ TEST(StaticLinkedListTest, Capacity) {
 }
 
 TEST(StaticLinkedListTest, Front) {
-	StaticLinkedList<int> list(10);
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+	StaticLinkedList<int> list(pool);
 
 	EXPECT_EQ(list.front(), nullptr);
 
@@ -209,7 +220,8 @@ TEST(StaticLinkedListTest, Front) {
 }
 
 TEST(StaticLinkedListTest, Back) {
-	StaticLinkedList<int> list(10);
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+	StaticLinkedList<int> list(pool);
 
 	EXPECT_EQ(list.back(), nullptr);
 
@@ -230,7 +242,8 @@ TEST(StaticLinkedListTest, Back) {
 }
 
 TEST(StaticLinkedListTest, Clear) {
-	StaticLinkedList<int> list(10);
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+	StaticLinkedList<int> list(pool);
 
 	list.push_back(10);
 	list.clear();
@@ -247,7 +260,8 @@ TEST(StaticLinkedListTest, Clear) {
 }
 
 TEST(StaticLinkedListTest, Exists) {
-	StaticLinkedList<int> list(10);
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+	StaticLinkedList<int> list(pool);
 
 	EXPECT_FALSE(list.exists(100));
 
@@ -271,7 +285,8 @@ TEST(StaticLinkedListTest, Exists) {
 }
 
 TEST(StaticLinkedListTest, Find) {
-	StaticLinkedList<int> list(10);
+	ObjectPool<StaticLinkedList<int>::Node> pool(10);
+	StaticLinkedList<int> list(pool);
 
 	EXPECT_EQ(list.find(10), list.size());
 
@@ -294,7 +309,8 @@ TEST(StaticLinkedListTest, Find) {
 }
 
 TEST(StaticLinkedListTest, Reverse) {
-	StaticLinkedList<double> list(5);
+	ObjectPool<StaticLinkedList<double>::Node> pool(5);
+	StaticLinkedList<double> list(pool);
 
 	list.push_back(10);
 	list.push_back(20);
@@ -311,7 +327,8 @@ TEST(StaticLinkedListTest, Reverse) {
 }
 
 TEST(StaticLinkedListTest, ReuseFreedNode) {
-	StaticLinkedList<double> list(3);
+	ObjectPool<StaticLinkedList<double>::Node> pool(3);
+	StaticLinkedList<double> list(pool);
 
 	list.push_back(10);
 	list.push_back(20);
@@ -330,7 +347,8 @@ TEST(StaticLinkedListTest, ReuseFreedNode) {
 }
 
 TEST(StaticLinkedListTest, DifferentCapacity) {
-	StaticLinkedList<int> list(3);
+	ObjectPool<StaticLinkedList<int>::Node> pool(3);
+	StaticLinkedList<int> list(pool);
 
 	EXPECT_EQ(list.capacity(), 3);
 

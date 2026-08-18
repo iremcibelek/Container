@@ -25,6 +25,9 @@
     <Filter Include="StaticLinkedList">
       <UniqueIdentifier>{4d896e40-f82a-44ea-bb0a-ffda39ee160c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ObjectPool">
+      <UniqueIdentifier>{275d7e45-d1c1-4927-8cde-cc1566941857}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -42,6 +45,9 @@
     <ClCompile Include="StaticLinkedList.cpp">
       <Filter>StaticLinkedList</Filter>
     </ClCompile>
+    <ClCompile Include="ObjectPool.cpp">
+      <Filter>ObjectPool</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StaticVector.h">
@@ -55,6 +61,9 @@
     </ClInclude>
     <ClInclude Include="StaticLinkedList.h">
       <Filter>StaticLinkedList</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectPool.h">
+      <Filter>ObjectPool</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
