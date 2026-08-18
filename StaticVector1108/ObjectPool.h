@@ -2,22 +2,26 @@
 
 #include <cstddef>
 
-template <typename T>
+template <typename T,std::size_t Capacity>
 class ObjectPool {
+public:
+    struct Node {
+        T data;
+        Node* next = nullptr;
+    };
+
 private:
-    T* objects; // dizi
-    bool* used;
-    std::size_t capacity_;
+    Node objects[Capacity];
+    bool used[Capacity]{};
 
 public:
-    explicit ObjectPool(std::size_t capacity);
-    ~ObjectPool();
+     ObjectPool();
+    ~ObjectPool()=default;
 
-    // = delete; : Copy constructor ve copy assignment operatörlerini derleyici seviyesinde yasaklar.
     ObjectPool(const ObjectPool&) = delete;
     ObjectPool& operator=(const ObjectPool&) = delete;
 
-    T* acquire();  // yer tahsis etme
-    void release(T* object);
-    std::size_t returnCapacity() const; // havuzun toplam kapasitesini doner
+    Node* acquire();
+    void release(Node* object);
+    std::size_t returnCapacity() const;
 };

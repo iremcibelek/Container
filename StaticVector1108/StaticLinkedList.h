@@ -3,21 +3,18 @@
 #include <cstddef>
 #include "ObjectPool.h"
 
-template <typename T>
+template <typename T,std::size_t Capacity>
 class StaticLinkedList {
 public:
-    struct Node {
-        T data;
-        Node* next = nullptr;
-    };
+    using Node = typename ObjectPool<T,Capacity>::Node;
 
 private:
-    ObjectPool<Node>& pool;
+    ObjectPool<T,Capacity>& pool;
     Node* head = nullptr;
     std::size_t count = 0;
 
 public:
-    explicit StaticLinkedList(ObjectPool<Node>& pool);
+    explicit StaticLinkedList(ObjectPool<T,Capacity>& pool);
     ~StaticLinkedList();
 
     bool push_front(const T& value);

@@ -1,17 +1,17 @@
 #include "StaticLinkedList.h"
 
-template<typename T>
-StaticLinkedList<T>::StaticLinkedList(ObjectPool<Node>& pool)
+template<typename T,std::size_t Capacity>
+StaticLinkedList<T, Capacity>::StaticLinkedList(ObjectPool <T,Capacity>& pool)
     : pool(pool), head(nullptr), count(0) {
 }
 
-template<typename T>
-StaticLinkedList<T>::~StaticLinkedList() {
+template<typename T,std::size_t Capacity>
+StaticLinkedList<T,Capacity>::~StaticLinkedList() {
     clear();
 }
 
-template<typename T>
-bool StaticLinkedList<T>::push_front(const T& value) {
+template<typename T,std::size_t Capacity>
+bool StaticLinkedList<T,Capacity>::push_front(const T& value) {
     Node* newNode = pool.acquire();
     if (newNode == nullptr)
         return false;
@@ -24,8 +24,8 @@ bool StaticLinkedList<T>::push_front(const T& value) {
     return true;
 }
 
-template<typename T>
-bool StaticLinkedList<T>::push_back(const T& value) {
+template<typename T,std::size_t Capacity>
+bool StaticLinkedList<T,Capacity>::push_back(const T& value) {
     Node* newNode = pool.acquire();
     if (newNode == nullptr)
         return false;
@@ -49,8 +49,8 @@ bool StaticLinkedList<T>::push_back(const T& value) {
     return true;
 }
 
-template<typename T>
-bool StaticLinkedList<T>::pop_front() {
+template<typename T,std::size_t Capacity>
+bool StaticLinkedList<T,Capacity>::pop_front() {
     if (head == nullptr)
         return false;
 
@@ -62,8 +62,8 @@ bool StaticLinkedList<T>::pop_front() {
     return true;
 }
 
-template<typename T>
-bool StaticLinkedList<T>::pop_back() {
+template<typename T,std::size_t Capacity>
+bool StaticLinkedList<T,Capacity>::pop_back() {
     if (head == nullptr)
         return false;
 
@@ -88,8 +88,8 @@ bool StaticLinkedList<T>::pop_back() {
     return true;
 }
 
-template<typename T>
-bool StaticLinkedList<T>::insertByIndex(std::size_t index, const T& value) {
+template<typename T,std::size_t Capacity>
+bool StaticLinkedList<T,Capacity>::insertByIndex(std::size_t index, const T& value) {
     if (index > count)
         return false;
 
@@ -116,8 +116,8 @@ bool StaticLinkedList<T>::insertByIndex(std::size_t index, const T& value) {
     return true;
 }
 
-template<typename T>
-bool StaticLinkedList<T>::eraseByIndex(std::size_t index) {
+template<typename T,std::size_t Capacity>
+bool StaticLinkedList<T,Capacity>::eraseByIndex(std::size_t index) {
     if (index >= count)
         return false;
 
@@ -140,8 +140,8 @@ bool StaticLinkedList<T>::eraseByIndex(std::size_t index) {
     return true;
 }
 
-template<typename T>
-bool StaticLinkedList<T>::eraseByData(const T& value) {
+template<typename T,std::size_t Capacity>
+bool StaticLinkedList<T,Capacity>::eraseByData(const T& value) {
     if (head == nullptr)
         return false;
 
@@ -164,38 +164,38 @@ bool StaticLinkedList<T>::eraseByData(const T& value) {
     return true;
 }
 
-template<typename T>
-std::size_t StaticLinkedList<T>::size() const {
+template<typename T,std::size_t Capacity>
+std::size_t StaticLinkedList<T,Capacity>::size() const {
     return count;
 }
 
-template<typename T>
-bool StaticLinkedList<T>::isEmpty() const {
+template<typename T,std::size_t Capacity>
+bool StaticLinkedList<T,Capacity>::isEmpty() const {
     return count == 0;
 }
 
-template<typename T>
-bool StaticLinkedList<T>::isFull() const {
+template<typename T,std::size_t Capacity>
+bool StaticLinkedList<T,Capacity>::isFull() const {
     return count == pool.returnCapacity();
 }
 
-template<typename T>
-std::size_t StaticLinkedList<T>::capacity() const {
+template<typename T,std::size_t Capacity>
+std::size_t StaticLinkedList<T,Capacity>::capacity() const {
     return pool.returnCapacity();
 }
 
-template<typename T>
-T* StaticLinkedList<T>::front() {
+template<typename T,std::size_t Capacity>
+T* StaticLinkedList<T,Capacity>::front() {
     return head ? &head->data : nullptr;
 }
 
-template<typename T>
-const T* StaticLinkedList<T>::front() const {
+template<typename T,std::size_t Capacity>
+const T* StaticLinkedList<T,Capacity>::front() const {
     return head ? &head->data : nullptr;
 }
 
-template<typename T>
-T* StaticLinkedList<T>::back() {
+template<typename T,std::size_t Capacity>
+T* StaticLinkedList<T,Capacity>::back() {
     if (head == nullptr)
         return nullptr;
 
@@ -206,8 +206,8 @@ T* StaticLinkedList<T>::back() {
     return &temp->data;
 }
 
-template<typename T>
-const T* StaticLinkedList<T>::back() const {
+template<typename T,std::size_t Capacity>
+const T* StaticLinkedList<T,Capacity>::back() const {
     if (head == nullptr)
         return nullptr;
 
@@ -218,8 +218,8 @@ const T* StaticLinkedList<T>::back() const {
     return &temp->data;
 }
 
-template<typename T>
-void StaticLinkedList<T>::clear() {
+template<typename T,std::size_t Capacity>
+void StaticLinkedList<T,Capacity>::clear() {
     Node* temp = head;
     while (temp != nullptr) {
         Node* nextNode = temp->next;
@@ -230,8 +230,8 @@ void StaticLinkedList<T>::clear() {
     count = 0;
 }
 
-template<typename T>
-bool StaticLinkedList<T>::exists(const T& value) const {
+template<typename T, std::size_t Capacity>
+bool StaticLinkedList<T, Capacity>::exists(const T& value) const {
     Node* temp = head;
     while (temp != nullptr) {
         if (temp->data == value)
@@ -241,8 +241,8 @@ bool StaticLinkedList<T>::exists(const T& value) const {
     return false;
 }
 
-template<typename T>
-std::size_t StaticLinkedList<T>::find(const T& value) const {
+template<typename T,std::size_t Capacity>
+std::size_t StaticLinkedList<T, Capacity>::find(const T& value) const {
     Node* temp = head;
     std::size_t index = 0;
 
@@ -256,8 +256,8 @@ std::size_t StaticLinkedList<T>::find(const T& value) const {
     return count;
 }
 
-template<typename T>
-void StaticLinkedList<T>::reverse() {
+template<typename T,std::size_t Capacity>
+void StaticLinkedList<T, Capacity>::reverse() {
     Node* prev = nullptr;
     Node* current = head;
     Node* next = nullptr;
@@ -273,5 +273,8 @@ void StaticLinkedList<T>::reverse() {
 }
 
 // Explicit Instantiations
-template class StaticLinkedList<int>;
-template class StaticLinkedList<double>;
+template class StaticLinkedList<int, 10>;
+template class StaticLinkedList<int, 3>;
+template class StaticLinkedList<double, 10>;
+template class StaticLinkedList<double, 5>;
+template class StaticLinkedList<double, 3>;

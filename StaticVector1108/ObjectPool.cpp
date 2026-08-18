@@ -1,26 +1,16 @@
 #include "ObjectPool.h"
-#include "StaticLinkedList.h" // Node turunu kullanabilmek icin
 
-template <typename T>
-ObjectPool<T>::ObjectPool(std::size_t capacity) : capacity_(capacity) {
-    // : capacity_(capacity) Dýþarýdan gelen kapasite deðerini doðrudan sýnýfýn capacity_ alanýna atar.
-    objects = new T[capacity_];
-    used = new bool[capacity_];
+template <typename T,std::size_t Capacity>
+ObjectPool<T,Capacity>::ObjectPool() {
 
-    for (std::size_t i = 0; i < capacity_; i++) {
+    for (std::size_t i = 0; i < Capacity; i++) {
         used[i] = false;
     }
 }
 
-template <typename T>
-ObjectPool<T>::~ObjectPool() {
-    delete[] objects; // new ile acýlan iki diziyi heap bellekten temizler
-    delete[] used;
-}
-
-template <typename T>
-T* ObjectPool<T>::acquire() { // alan tahsis etme
-    for (std::size_t i = 0; i < capacity_; i++) {
+template <typename T,std::size_t Capacity>
+typename ObjectPool<T,Capacity>::Node* ObjectPool<T,Capacity>::acquire() {
+    for (std::size_t i = 0; i < Capacity; i++) {
         if (!used[i]) {
             used[i] = true;
             return &objects[i];
@@ -29,12 +19,12 @@ T* ObjectPool<T>::acquire() { // alan tahsis etme
     return nullptr;
 }
 
-template <typename T>
-void ObjectPool<T>::release(T* object) {
+template <typename T,std::size_t Capacity>
+void ObjectPool<T,Capacity>::release(Node* object) {
     if (object == nullptr)
         return;
 
-    for (std::size_t i = 0; i < capacity_; i++) {
+    for (std::size_t i = 0; i < Capacity; i++) {
         if (&objects[i] == object) {
             used[i] = false;
             return;
@@ -42,11 +32,14 @@ void ObjectPool<T>::release(T* object) {
     }
 }
 
-template <typename T>
-std::size_t ObjectPool<T>::returnCapacity() const {
-    return capacity_;
+template <typename T,std::size_t Capacity>
+std::size_t ObjectPool<T,Capacity>::returnCapacity() const {
+    return Capacity;
 }
 
 // Explicit Instantiations
-template class ObjectPool<StaticLinkedList<int>::Node>;
-template class ObjectPool<StaticLinkedList<double>::Node>;
+template class ObjectPool<int, 10>;
+template class ObjectPool<int, 3>;
+template class ObjectPool<double, 10>;
+template class ObjectPool<double, 5>;
+template class ObjectPool<double, 3>;
