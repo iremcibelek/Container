@@ -28,6 +28,12 @@
     <Filter Include="ObjectPool">
       <UniqueIdentifier>{275d7e45-d1c1-4927-8cde-cc1566941857}</UniqueIdentifier>
     </Filter>
+    <Filter Include="BinarySearchTree">
+      <UniqueIdentifier>{d4871a6e-0664-49b1-8e32-c241b795efad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PoolBST">
+      <UniqueIdentifier>{604b12f4-de71-45d9-86b8-ba8f554b1f4d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -48,6 +54,12 @@
     <ClCompile Include="ObjectPool.cpp">
       <Filter>ObjectPool</Filter>
     </ClCompile>
+    <ClCompile Include="BinarySearchTree.cpp">
+      <Filter>BinarySearchTree</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolBST.cpp">
+      <Filter>PoolBST</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StaticVector.h">
@@ -64,6 +76,12 @@
     </ClInclude>
     <ClInclude Include="ObjectPool.h">
       <Filter>ObjectPool</Filter>
+    </ClInclude>
+    <ClInclude Include="BinarySearchTree.h">
+      <Filter>BinarySearchTree</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolBST.h">
+      <Filter>PoolBST</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
