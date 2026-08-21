@@ -34,6 +34,12 @@
     <Filter Include="PoolBST">
       <UniqueIdentifier>{604b12f4-de71-45d9-86b8-ba8f554b1f4d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="RedBlackTree">
+      <UniqueIdentifier>{df93efb7-575a-42ed-96d9-f4b79c4e77b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PoolRBT">
+      <UniqueIdentifier>{1c48cbdd-8ce0-4afd-8c0c-ea0a04c6f816}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -60,6 +66,12 @@
     <ClCompile Include="PoolBST.cpp">
       <Filter>PoolBST</Filter>
     </ClCompile>
+    <ClCompile Include="RedBlackTree.cpp">
+      <Filter>RedBlackTree</Filter>
+    </ClCompile>
+    <ClCompile Include="PoolRBT.cpp">
+      <Filter>PoolRBT</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="StaticVector.h">
@@ -82,6 +94,12 @@
     </ClInclude>
     <ClInclude Include="PoolBST.h">
       <Filter>PoolBST</Filter>
+    </ClInclude>
+    <ClInclude Include="RedBlackTree.h">
+      <Filter>RedBlackTree</Filter>
+    </ClInclude>
+    <ClInclude Include="PoolRBT.h">
+      <Filter>PoolRBT</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

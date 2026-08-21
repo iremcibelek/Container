@@ -136,6 +136,8 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjectPool.cpp" />
     <ClCompile Include="PoolBST.cpp" />
+    <ClCompile Include="PoolRBT.cpp" />
+    <ClCompile Include="RedBlackTree.cpp" />
     <ClCompile Include="StaticLinkedList.cpp" />
     <ClCompile Include="StaticQueue.cpp" />
     <ClCompile Include="StaticVector.cpp" />
@@ -145,6 +147,8 @@
     <ClInclude Include="LinkedList.h" />
     <ClInclude Include="ObjectPool.h" />
     <ClInclude Include="PoolBST.h" />
+    <ClInclude Include="PoolRBT.h" />
+    <ClInclude Include="RedBlackTree.h" />
     <ClInclude Include="StaticLinkedList.h" />
     <ClInclude Include="StaticQueue.h" />
     <ClInclude Include="StaticVector.h" />
